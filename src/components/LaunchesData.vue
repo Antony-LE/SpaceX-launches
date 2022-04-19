@@ -1,9 +1,9 @@
 <template>
 <section>
-        <v-btn v-on:click="updateLaunches"  rounded color="primary" dark >
-             Charger les lancements
+         <v-btn v-on:click="updateLaunches(); isHidden= !isHidden" rounded color="primary" dark >
+             {{ isHidden ? "Masquer les lancements": "Charger les lancements"}}
         </v-btn>
-        <ul>
+        <ul v-if="isHidden==true">
             <li v-for="LaunchData in LaunchesData" v-bind:key="LaunchData.flight_number">
                 <p>Nom : {{ LaunchData.mission_name }}</p>
                 <p>Date de lancement : {{ LaunchData.launch_date_utc }}</p>
@@ -29,6 +29,7 @@ export default {
   data() {
     return {
       LaunchesData: {},
+      isHidden: false,
     };
   },
   methods: {
