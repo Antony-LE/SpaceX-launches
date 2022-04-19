@@ -1,6 +1,8 @@
 <template>
 <section>
-<button v-on:click="updateTimeline" >Charger la timeline</button>
+<v-btn v-on:click="updateTimeline" rounded color="primary" dark >
+             Charger la l'historique
+        </v-btn>
      <v-timeline>
     <v-timeline-item
      v-for="launch in launches" v-bind:key="launch.flight_number"

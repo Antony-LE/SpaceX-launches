@@ -1,6 +1,8 @@
 <template>
 <section>
-        <button v-on:click="updateLaunches" >Charger les lancements</button>
+        <v-btn v-on:click="updateLaunches"  rounded color="primary" dark >
+             Charger les lancements
+        </v-btn>
         <ul>
             <li v-for="LaunchData in LaunchesData" v-bind:key="LaunchData.flight_number">
                 <p>Nom : {{ LaunchData.mission_name }}</p>
