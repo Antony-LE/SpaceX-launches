@@ -1,9 +1,9 @@
 <template>
 <section>
-<v-btn v-on:click="updateTimeline" rounded color="primary" dark >
-             Charger la l'historique
+<v-btn v-on:click="updateTimeline(); isHidden= !isHidden" rounded color="primary" dark >
+             {{ isHidden ? "Masquer l'historique": "Charger l'historique"}}
         </v-btn>
-     <v-timeline>
+     <v-timeline v-if="isHidden==true">
     <v-timeline-item
      v-for="launch in launches" v-bind:key="launch.flight_number"
       large
@@ -37,6 +37,7 @@ export default {
   data() {
     return {
       launches: [],
+      isHidden: false,
     };
   },
   methods: {
