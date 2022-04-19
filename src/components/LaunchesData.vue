@@ -3,32 +3,55 @@
          <v-btn v-on:click="updateLaunches(); isHidden= !isHidden" rounded color="primary" dark >
              {{ isHidden ? "Masquer les lancements": "Charger les lancements"}}
         </v-btn>
- <v-container v-if="isHidden===true"  class="grey lighten-5">
+ <v-container v-if="isHidden===true"  class="transparent lighten-5">
     <v-row no-gutters>
       <v-col
         v-for="LaunchData in LaunchesData"
         :key="LaunchData.flight_number"
         cols="12"
-        sm="4"
+        sm="3"
       >
-          <v-card class="mx-auto" max-width="400" max-height="900" height="60vh">
+
+           <v-hover v-slot="{ hover }">
+    <v-card
+      class="mx-auto"
+      color="transparent lighten-6"
+      max-width="500"
+    >
       <v-img
-        class="white--text align-end"
-        max-width="100%"
-        max-height="100%"
-        v-bind:src="LaunchData.links.mission_patch_small"
+        v-bind:src="LaunchData.links.mission_patch_small" alt="mission-patch"
+        height="100%"
+        width="100%"
       >
+        <v-expand-transition v-if="LaunchData.details">
+          <div
+            v-if="hover"
+            class="d-flex transition-fast-in-fast-out light-blue darken-2 v-card--reveal text-p white--text"
+            style="height: 100%;"
+          >
+            {{LaunchData.details}}
+          </div>
+        </v-expand-transition>
       </v-img>
-      <v-card-title>Mission : {{ LaunchData.mission_name }}</v-card-title>
-      <v-card-subtitle class="pb-0">
-        Date : {{ LaunchData.launch_date_utc }}
-      </v-card-subtitle>
-      <v-card-text class="text--primary">
-        <div><strong>Site de lancement :</strong> {{ LaunchData.launch_site.site_name_long }} </div>
-        <br>
-        <div>{{ LaunchData.details }}</div>
+      <v-card-text
+        class="pt-6"
+        style="position: relative;"
+      >
+        <div class="font-weight-light white--text text-h6 mb-2">
+          Fusée : {{LaunchData.rocket.rocket_name}}
+        </div>
+        <div class="font-weight-light white--text text-h6 mb-2">
+          Date : {{LaunchData.launch_year}}
+        </div>
+        <h3 class="text-h6 font-weight-bold blue--text mb-2">
+          Mission : {{LaunchData.mission_name}}
+        </h3>
+        <div class="font-weight-light white--text text-h7 mb-2">
+        Site de Lancement : {{LaunchData.launch_site.site_name_long}}
+        </div>
       </v-card-text>
     </v-card>
+  </v-hover>
   </v-col>
     </v-row>
   </v-container>
@@ -42,6 +65,7 @@ export default {
   name: 'LaunchesData',
   props: {
     url: String,
+    message: String,
   },
   data() {
     return {
@@ -61,23 +85,10 @@ export default {
 </script>
 
 <style scoped>
-  ul {
-          list-style-type: none;
-      }
-
-  li {
-          margin-bottom: 1em;
-          border: solid white 1px;
-          width: 30vw;
-          margin-left: auto;
-          margin-right: auto;
-          padding: 1.5em;
-      }
-
     .mx-auto {
-        margin-bottom: 5em;
+        margin:2em;
         padding: 2em;
-        overflow: auto;
+        max-height: 85%;
     }
 
 </style>

@@ -53,4 +53,12 @@ export default {
           text-align: center;
           font-size: 4em;
       }
+
+      p {
+          margin-top: 1.5em;
+      }
+      .next-launch {
+          color: white;
+          display: block;
+      }
 </style>

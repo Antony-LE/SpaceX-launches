@@ -18,14 +18,13 @@
       </template>
       <v-card class="elevation-2">
         <v-card-title class="text-h5"> Mission : {{launch.mission_name}}</v-card-title>
-        <v-card-subtitle> Rocket : {{launch.rocket.rocket_name}}</v-card-subtitle>
+        <v-card-subtitle> Fusée : {{launch.rocket.rocket_name}}</v-card-subtitle>
         <v-card-text> {{launch.details}}</v-card-text>
       </v-card>
     </v-timeline-item>
   </v-timeline>
   </section>
 </template>
-
 <script>
 import axios from 'axios';
 
@@ -52,21 +51,25 @@ export default {
 </script>
 
 <style scoped>
- header {
-          background-color: white;
-          color: #004F87;
-          margin: 1em;
-          padding-top: 2em;
-          padding-bottom: 2em;
-      }
 
       span {
-        font-size: 1.7em;
+        font-size: 3em;
         font-weight: lighter;
+        color: white;
       }
 
       h1 {
           text-align: center;
           font-size: 4em;
       }
+
+      img {
+          height: 100px;
+          width: 100px;
+      }
+
+      .v-timeline {
+          width: 70vw;
+      }
+
 </style>
