@@ -1,5 +1,7 @@
 # spacex-timeline
 
+Hello, this is a small project built with VueJS, Vuetify and the free spaceX API (https://github.com/r-spacex/SpaceX-API)
+
 ## Project setup
 ```
 npm install
@@ -14,11 +16,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
