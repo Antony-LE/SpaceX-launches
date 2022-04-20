@@ -3,7 +3,7 @@
          <v-btn v-on:click="updateNextLaunch(); isHidden= !isHidden" rounded color="primary" dark >
              {{ isHidden ? "Masquer le lancement": "Charger le lancement"}}
         </v-btn>
-        <p v-if="isHidden===true">Le prochain lancement SpaceX de la fusée
+        <p v-if="isHidden===true">Prochain lancement SpaceX de la fusée
           <strong>{{ nextLaunchDatas.name }} </strong> aura lieu le
           <strong>{{ nextLaunchDatas.date_utc }} </strong>
         </p>

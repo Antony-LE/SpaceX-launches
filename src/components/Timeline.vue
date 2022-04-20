@@ -1,9 +1,15 @@
 <template>
 <section>
-<v-btn v-on:click="updateTimeline(); isHidden= !isHidden" rounded color="primary" dark >
-             {{ isHidden ? "Masquer l'historique": "Charger l'historique"}}
+<v-btn v-on:click="updateTimeline(); setLoading(); isHidden= !isHidden" rounded color="primary" dark >
+             {{ isHidden ? "Masquer l'historique": "Charger la timeline"}}
         </v-btn>
      <v-timeline v-if="isHidden===true">
+       <TrinityRingsSpinner 
+          v-if="loading" 
+          :animation-duration="1200"
+          :size="70"
+           color="#1976D2"
+     />
     <v-timeline-item
      v-for="launch in launches" v-bind:key="launch.flight_number"
       large
@@ -27,16 +33,21 @@
 </template>
 <script>
 import axios from 'axios';
+import {TrinityRingsSpinner} from 'epic-spinners'
 
 export default {
   name: 'Timeline',
   props: {
     url: String,
   },
+  components: {
+    TrinityRingsSpinner
+  },
   data() {
     return {
       launches: [],
       isHidden: false,
+      loading: true,
     };
   },
   methods: {
@@ -44,6 +55,13 @@ export default {
       axios
         .get(this.url)
         .then((response) => { this.launches = response.data });
+    },
+
+    setLoading() {
+      axios
+        .get(this.url)
+        .then(() => { this.loading = false })
+        .catch(error => error.response.data);
     },
 
   },
@@ -70,6 +88,14 @@ export default {
 
       .v-timeline {
           width: 70vw;
+      }
+
+      .trinity-rings-spinner {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
       }
 
 </style>

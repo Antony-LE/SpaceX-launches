@@ -86,9 +86,10 @@ export default {
 
 <style scoped>
     .mx-auto {
-        margin:2em;
-        padding: 2em;
-        max-height: 85%;
+      padding: 2em;
+      margin:2em;
+      height: fit-content;
+      text-shadow: 1px 1px 2px black;
     }
 
 </style>
