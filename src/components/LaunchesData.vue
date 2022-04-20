@@ -1,9 +1,15 @@
 <template>
 <section>
-         <v-btn v-on:click="updateLaunches(); isHidden= !isHidden" rounded color="primary" dark >
+         <v-btn v-on:click="updateLaunches(); setLoading(); isHidden= !isHidden" rounded color="primary" dark >
              {{ isHidden ? "Masquer les lancements": "Charger les lancements"}}
         </v-btn>
  <v-container v-if="isHidden===true"  class="transparent lighten-5">
+     <TrinityRingsSpinner 
+          v-if="loading" 
+          :animation-duration="1200"
+          :size="70"
+           color="#1976D2"
+     />
     <v-row no-gutters>
       <v-col
         v-for="LaunchData in LaunchesData"
@@ -60,17 +66,21 @@
 
 <script>
 import axios from 'axios';
+import {TrinityRingsSpinner} from 'epic-spinners'
 
 export default {
   name: 'LaunchesData',
   props: {
     url: String,
-    message: String,
+  },
+   components: {
+    TrinityRingsSpinner
   },
   data() {
     return {
       LaunchesData: {},
       isHidden: false,
+      loading: true,
     };
   },
   methods: {
@@ -79,6 +89,12 @@ export default {
       axios
         .get(this.url)
         .then((response) => { this.LaunchesData = response.data; });
+    },
+    setLoading() {
+      axios
+        .get(this.url)
+        .then(() => { this.loading = false })
+        .catch(error => error.response.data);
     },
   },
 };
@@ -91,5 +107,13 @@ export default {
       height: fit-content;
       text-shadow: 1px 1px 2px black;
     }
+
+     .trinity-rings-spinner {
+        margin-top: 1em;
+        margin-bottom: 1em;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
 
 </style>
